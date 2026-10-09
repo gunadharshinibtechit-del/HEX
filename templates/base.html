@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}HEX{% endblock %} | {{ domain_label }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head><body>
+<div class="layout"><aside class="sidebar"><a class="brand" href="{{ url_for('dashboard') }}"><span class="logo">H<span>×</span></span><span><b>HEX</b><small>Human-centered AI</small></span></a>
+<div class="nav-label">YOUR WORKSPACE</div>
+<a class="nav {% if request.endpoint=='dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span>⌂</span> Dashboard</a>
+<a class="nav {% if request.endpoint in ['applicants_page','add_applicant'] %}active{% endif %}" href="{{ url_for('applicants_page') }}"><span>♙</span> Applicants</a>
+<a class="nav {% if request.endpoint=='add_applicant' %}active{% endif %}" href="{{ url_for('add_applicant') }}"><span>＋</span> Add applicant</a>
+<a class="nav {% if request.endpoint=='how_it_works' %}active{% endif %}" href="{{ url_for('how_it_works') }}"><span>ⓘ</span> How it works</a>
+<div class="sidebar-note"><div class="note-icon">✦</div><b>People stay in control</b><p>HEX explains a demo recommendation. A human reviewer makes the final decision.</p><span class="demo-status">● Demo mode</span></div>
+<div class="sidebar-foot"><div class="avatar">HX</div><div><b>Reviewer workspace</b><small>Local demo · no sign-in</small></div></div></aside>
+<main class="main"><header class="topbar"><div><span class="muted">Workspace</span><span class="slash">/</span><strong>{% block breadcrumb %}Dashboard{% endblock %}</strong></div><span class="top-chip"><i></i> DEMO ENVIRONMENT</span></header>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+<footer class="footer">HEX · Human-in-the-Loop Explainability <span>Learning prototype only · Not for real eligibility decisions</span></footer></main></div>
+</body></html>
